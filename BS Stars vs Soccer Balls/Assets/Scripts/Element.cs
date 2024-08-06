@@ -51,6 +51,11 @@ public class Element : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out ClearObject clear))
         {
             ReturnToPool();
+
+            if (_currentTypeElement == TypeElement.True)
+            {
+                GameSessionHandler.OnDiscreaseHp?.Invoke();
+            }
         }
     }
 }

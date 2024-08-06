@@ -12,8 +12,6 @@ public class InputHandler : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse Clicked");
-
             RaycastHit2D hit;
 
             Vector2 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -24,7 +22,6 @@ public class InputHandler : MonoBehaviour
                 if (hit.collider.gameObject.TryGetComponent(out Shuriken sh))
                 {
                     _currentShuriken = sh;
-                    Debug.Log("объект: " + sh.gameObject.name);
                 }
             }
         }

@@ -42,10 +42,10 @@ public class Shuriken : MonoBehaviour
             {
                 case Element.TypeElement.True:
                     Explosion.Instance.SetPosExplosion(element.transform.position);
-                    Debug.Log("True");
+                    GameSessionHandler.OnAddScore?.Invoke();
                     break;
                 case Element.TypeElement.False:
-                    Debug.Log("False");
+                    GameSessionHandler.OnDiscreaseHp?.Invoke();
                     break;
             }
             element.ReturnToPool();
@@ -53,7 +53,7 @@ public class Shuriken : MonoBehaviour
             _rbShuriken.isKinematic = true;
             _rbShuriken.velocity = Vector2.zero;
             transform.gameObject.SetActive(false);
-            GameHandler.OnShurikenMoveEnd?.Invoke();
+            GameSessionHandler.OnShurikenMoveEnd?.Invoke();
         }
 
         if (collision.gameObject.TryGetComponent(out ClearObject clear))
@@ -61,7 +61,7 @@ public class Shuriken : MonoBehaviour
             _rbShuriken.isKinematic = true;
             _rbShuriken.velocity = Vector2.zero;
             transform.gameObject.SetActive(false);
-            GameHandler.OnShurikenMoveEnd?.Invoke();
+            GameSessionHandler.OnShurikenMoveEnd?.Invoke();
         }
     } 
 }

@@ -12,9 +12,28 @@ public class Spawner : MonoBehaviour
 
     private int numPosSpawn;
 
+    private bool isBallSpawnInTime = false;
+
     private void Start()
     {
+        GameSessionHandler.OnEndGame += StopSpawnElements;
+        GameSessionHandler.OnStartSessionGame += StartSpawnElements;
+    }
+
+    private void OnDestroy()
+    {
+        GameSessionHandler.OnEndGame -= StopSpawnElements;
+        GameSessionHandler.OnStartSessionGame -= StartSpawnElements;
+    }
+
+    private void StartSpawnElements()
+    {
         StartCoroutine(WaitToSpawnElement());
+    }
+
+    private void StopSpawnElements()
+    {
+        StopAllCoroutines();
     }
 
     private IEnumerator WaitToSpawnElement()
@@ -37,16 +56,25 @@ public class Spawner : MonoBehaviour
         float randomValue = Random.Range(0, 100);
         DataElement data;
 
-        if (randomValue < 50)
+        if (isBallSpawnInTime)//randomValue < 70)
         {
             data = new DataElement(_falseSprites[Random.Range(0, _falseSprites.Length)], Element.TypeElement.False);
         }
         else
         {
             data = new DataElement(_trueSprites, Element.TypeElement.True);
+            isBallSpawnInTime = true;
+            StartCoroutine(WaitSpawnBall());
         }
 
         return data;
+    }
+
+    private IEnumerator WaitSpawnBall()
+    {
+        yield return new WaitForSeconds(Random.Range(2,4));
+        isBallSpawnInTime = false;
+
     }
 }
 

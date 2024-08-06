@@ -21,8 +21,6 @@ public class ObjectPool : MonoBehaviour
         {
             element = Instantiate(_prefabs);
             element.SetObjectPool(this);
-
-            Debug.Log("Create");
         }
 
         return element;
