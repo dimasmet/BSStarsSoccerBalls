@@ -34,7 +34,7 @@ public class ObjectPool : MonoBehaviour
         element.transform.SetParent(transform);
 
         element.transform.localPosition = Vector3.zero;
-        element.transform.localScale = Vector3.one;
+        element.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
         element.transform.localEulerAngles = Vector3.one;
 
         _objectPool.Push(element);

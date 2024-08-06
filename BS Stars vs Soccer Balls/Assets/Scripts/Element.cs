@@ -13,6 +13,13 @@ public class Element : MonoBehaviour
     private TypeElement _currentTypeElement;
 
     [SerializeField] private SpriteRenderer _sprite;
+    private Rigidbody2D rb;
+    [SerializeField] private float _forceUp;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     public void SetObjectPool(ObjectPool objectPool)
     {
@@ -25,6 +32,8 @@ public class Element : MonoBehaviour
         _sprite.sprite = dataElement.image;
 
         transform.position = position;
+
+        rb.AddForce(Vector2.up * _forceUp);
     }
 
     public void ReturnToPool()

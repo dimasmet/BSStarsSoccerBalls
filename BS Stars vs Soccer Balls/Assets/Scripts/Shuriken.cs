@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Shuriken : MonoBehaviour
 {
+    [SerializeField] private Animator _animShuriken;
+    [SerializeField] private SpriteRenderer _spriteRend;
+    [SerializeField] private Sprite[] _sprites;
+    private int _numImage;
+
     private Rigidbody2D _rbShuriken;
 
     private void Awake()
@@ -11,10 +16,52 @@ public class Shuriken : MonoBehaviour
         _rbShuriken = GetComponent<Rigidbody2D>();
     }
 
+    public void InitNew()
+    {
+        _spriteRend.sprite = _sprites[_numImage];
+        _numImage++;
+        if (_numImage >= _sprites.Length) _numImage = 0;
+
+        _animShuriken.Play("idle");
+    }
+
     public void AddForceToMove(Vector2 directionMove, float force)
     {
         _rbShuriken.isKinematic = false;
-        //_rbShuriken.AddForce(directionMove * force);
         _rbShuriken.velocity = directionMove * force;
+        _animShuriken.Play("Rotate");
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out Element element))
+        {
+            Element.TypeElement type = element.GetTypeElement();
+
+            switch (type)
+            {
+                case Element.TypeElement.True:
+                    Explosion.Instance.SetPosExplosion(element.transform.position);
+                    Debug.Log("True");
+                    break;
+                case Element.TypeElement.False:
+                    Debug.Log("False");
+                    break;
+            }
+            element.ReturnToPool();
+
+            _rbShuriken.isKinematic = true;
+            _rbShuriken.velocity = Vector2.zero;
+            transform.gameObject.SetActive(false);
+            GameHandler.OnShurikenMoveEnd?.Invoke();
+        }
+
+        if (collision.gameObject.TryGetComponent(out ClearObject clear))
+        {
+            _rbShuriken.isKinematic = true;
+            _rbShuriken.velocity = Vector2.zero;
+            transform.gameObject.SetActive(false);
+            GameHandler.OnShurikenMoveEnd?.Invoke();
+        }
+    } 
 }

@@ -10,6 +10,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Sprite[] _falseSprites;
     [SerializeField] private Sprite _trueSprites;
 
+    private int numPosSpawn;
+
     private void Start()
     {
         StartCoroutine(WaitToSpawnElement());
@@ -19,8 +21,10 @@ public class Spawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.2f);
-            Vector2 posSpawn = _points[Random.Range(0, _points.Length)].position;
+            yield return new WaitForSeconds(1f);
+            Vector2 posSpawn = _points[numPosSpawn].position;
+            numPosSpawn++;
+            if (numPosSpawn >= _points.Length) numPosSpawn = 0;
 
             Element element = objectPool.GetElement();
             element.InitElement(GetDataToElement(), posSpawn);
