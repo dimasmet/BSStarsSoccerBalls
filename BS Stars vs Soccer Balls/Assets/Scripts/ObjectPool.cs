@@ -7,6 +7,8 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] private Element _prefabs;
     private Stack<Element> _objectPool = new Stack<Element>();
 
+    private List<Element> _listElements = new List<Element>();
+
     public Element GetElement()
     {
         Element element;
@@ -21,6 +23,8 @@ public class ObjectPool : MonoBehaviour
         {
             element = Instantiate(_prefabs);
             element.SetObjectPool(this);
+
+            _listElements.Add(element);
         }
 
         return element;
@@ -36,6 +40,14 @@ public class ObjectPool : MonoBehaviour
         element.transform.localEulerAngles = Vector3.one;
 
         _objectPool.Push(element);
+    }
+
+    public void HideAllObject()
+    {
+        for (int i = 0; i < _listElements.Count; i++)
+        {
+            _listElements[i].gameObject.SetActive(false);
+        }
     }
 }
 

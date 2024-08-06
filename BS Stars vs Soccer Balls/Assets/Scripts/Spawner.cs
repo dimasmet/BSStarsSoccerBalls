@@ -28,12 +28,16 @@ public class Spawner : MonoBehaviour
 
     private void StartSpawnElements()
     {
+        StopAllCoroutines();
+        objectPool.HideAllObject();
+        isBallSpawnInTime = false;
         StartCoroutine(WaitToSpawnElement());
     }
 
     private void StopSpawnElements()
     {
         StopAllCoroutines();
+        objectPool.HideAllObject();
     }
 
     private IEnumerator WaitToSpawnElement()

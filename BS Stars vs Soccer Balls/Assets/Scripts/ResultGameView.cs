@@ -16,11 +16,16 @@ public class ResultGameView : MonoBehaviour
         _restartBtn.onClick.AddListener(() =>
         {
             _animation.Play("idle");
+            _panel.SetActive(false);
+            GameSessionHandler.OnStartSessionGame?.Invoke();
         });
 
         _exitBtn.onClick.AddListener(() =>
         {
             _animation.Play("idle");
+            _panel.SetActive(false);
+
+            ScreenManager.Instance.OpenScreenGame(ScreenManager.NameScreen.Menu);
         });
     }
 
