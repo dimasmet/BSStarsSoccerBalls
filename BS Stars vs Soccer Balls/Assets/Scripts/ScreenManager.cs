@@ -11,13 +11,10 @@ public class ScreenManager : MonoBehaviour
     {
         Menu,
         Game,
-        Warning
     }
 
     private GameObject _curActiveScreen;
 
-    [SerializeField] private GameObject _loadingScreen;
-    [SerializeField] private GameObject _warningScreen;
     [SerializeField] private GameObject _homeScreen;
     [SerializeField] private GameObject _gameScreen;
 
@@ -59,9 +56,6 @@ public class ScreenManager : MonoBehaviour
                 break;
             case NameScreen.Game:
                 ScreenOpen(_gameScreen);
-                break;
-            case NameScreen.Warning:
-                ScreenOpen(_warningScreen);
                 break;
         }
     }
