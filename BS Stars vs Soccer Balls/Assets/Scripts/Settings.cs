@@ -13,6 +13,12 @@ public class Settings : MonoBehaviour
     [SerializeField] private Button _privacy;
     [SerializeField] private Button _terms;
 
+    [Header("Sounds")]
+    [SerializeField] private Button _soundsBtn;
+    [SerializeField] private Button _musicBtn;
+    [SerializeField] private Sprite _activeSprite;
+    [SerializeField] private Sprite _noActiveSprite;
+
     [Header("FirstRun")]
     [SerializeField] private GameObject _panelWarn;
     [SerializeField] private Button _privacyOpenBtn;
@@ -25,6 +31,30 @@ public class Settings : MonoBehaviour
 
     private void Awake()
     {
+        _soundsBtn.onClick.AddListener(() =>
+        {
+            bool resultClick = SoundsGame.I.ActivitySounds();
+            Sprite nS;
+            if (resultClick)
+                nS = _activeSprite;
+            else
+                nS = _noActiveSprite;
+
+            _soundsBtn.transform.GetChild(0).GetComponent<Image>().sprite = nS;
+        });
+
+        _musicBtn.onClick.AddListener(() =>
+        {
+            bool resultClick = SoundsGame.I.ActivityMusic();
+            Sprite nS;
+            if (resultClick)
+                nS = _activeSprite;
+            else
+                nS = _noActiveSprite;
+
+            _musicBtn.transform.GetChild(0).GetComponent<Image>().sprite = nS;
+        });
+
         _openBtn.onClick.AddListener(() =>
         {
             _settingsPanel.SetActive(true);

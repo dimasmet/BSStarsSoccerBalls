@@ -37,6 +37,8 @@ public class ScreenManager : MonoBehaviour
         {
             OpenScreenGame(NameScreen.Game);
             _rulesGameHandler.ActiveRules();
+
+            SoundsGame.I.RunSound(SoundsGame.Sound.Click);
         });
 
         _exitBtn.onClick.AddListener(() =>

@@ -43,9 +43,13 @@ public class Shuriken : MonoBehaviour
                 case Element.TypeElement.True:
                     Explosion.Instance.SetPosExplosion(element.transform.position);
                     GameSessionHandler.OnAddScore?.Invoke();
+
+                    SoundsGame.I.RunSound(SoundsGame.Sound.Boom);
                     break;
                 case Element.TypeElement.False:
                     GameSessionHandler.OnDiscreaseHp?.Invoke();
+
+                    SoundsGame.I.RunSound(SoundsGame.Sound.Bomb);
                     break;
             }
             element.ReturnToPool();

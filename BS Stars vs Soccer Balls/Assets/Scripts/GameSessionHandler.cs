@@ -61,6 +61,8 @@ public class GameSessionHandler : MonoBehaviour
         bool isNewRecord = _records.CheckNewResultValue(score);
 
         _resultGameView.OpenResultView(score, isNewRecord);
+
+        SoundsGame.I.RunSound(SoundsGame.Sound.Result);
     }
 
     private void DiscreaseHp()

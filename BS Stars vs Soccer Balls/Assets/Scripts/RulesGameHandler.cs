@@ -27,6 +27,8 @@ public class RulesGameHandler : MonoBehaviour
                 _mainPanel.SetActive(false);
                 GameSessionHandler.OnStartSessionGame?.Invoke();
             }
+
+            SoundsGame.I.RunSound(SoundsGame.Sound.Click);
         });
     }
 
