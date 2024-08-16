@@ -19,8 +19,6 @@ public class Shuriken : MonoBehaviour
     public void InitNew()
     {
         _spriteRend.sprite = _sprites[_numImage];
-        _numImage++;
-        if (_numImage >= _sprites.Length) _numImage = 0;
 
         _animShuriken.Play("idle");
     }
@@ -30,6 +28,12 @@ public class Shuriken : MonoBehaviour
         _rbShuriken.isKinematic = false;
         _rbShuriken.velocity = directionMove * force;
         _animShuriken.Play("Rotate");
+    }
+
+    public void SetSkin(int number)
+    {
+        _numImage = number;
+        _spriteRend.sprite = _sprites[_numImage];
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

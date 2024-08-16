@@ -36,6 +36,7 @@ public class PauseView : MonoBehaviour
         {
             _pausePanel.SetActive(false);
             Time.timeScale = 1;
+            GameSessionHandler.OnEndGame?.Invoke();
 
             ScreenManager.Instance.OpenScreenGame(ScreenManager.NameScreen.Menu);
         });

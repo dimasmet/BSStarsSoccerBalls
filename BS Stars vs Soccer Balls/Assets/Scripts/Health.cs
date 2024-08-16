@@ -29,6 +29,7 @@ public class Health
             if (_health <= 0)
             {
                 GameSessionHandler.OnEndGame?.Invoke();
+                GameSessionHandler.OnResultGame?.Invoke();
             }
         }
     }

@@ -10,6 +10,7 @@ public class GameSessionHandler : MonoBehaviour
     public static Action OnShurikenMoveEnd;
     public static Action OnDiscreaseHp;
     public static Action OnEndGame;
+    public static Action OnResultGame;
     public static Action OnAddScore;
 
     private SpawnerShuriken _spawnerShuriken;
@@ -36,7 +37,7 @@ public class GameSessionHandler : MonoBehaviour
         OnShurikenMoveEnd += NewShuriken;
         OnDiscreaseHp += DiscreaseHp;
         OnStartSessionGame += RunGame;
-        OnEndGame += ViewResult;
+        OnResultGame += ViewResult;
     }
 
     private void OnDestroy()
@@ -44,7 +45,7 @@ public class GameSessionHandler : MonoBehaviour
         OnShurikenMoveEnd -= NewShuriken;
         OnDiscreaseHp -= DiscreaseHp;
         OnStartSessionGame -= RunGame;
-        OnEndGame -= ViewResult;
+        OnResultGame -= ViewResult;
     }
 
     private void RunGame()

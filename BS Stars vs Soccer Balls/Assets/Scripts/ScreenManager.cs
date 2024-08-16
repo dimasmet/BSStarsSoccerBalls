@@ -11,7 +11,8 @@ public class ScreenManager : MonoBehaviour
     {
         Menu,
         Game,
-        Warning
+        Warning,
+        SkinsChoiced
     }
 
     private GameObject _curActiveScreen;
@@ -20,9 +21,13 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private GameObject _warningScreen;
     [SerializeField] private GameObject _homeScreen;
     [SerializeField] private GameObject _gameScreen;
+    [SerializeField] private GameObject _skinsScreen;
 
     [SerializeField] private Button _startGameBtn;
     [SerializeField] private Button _exitBtn;
+
+    [SerializeField] private Button _openSkinScreen;
+    [SerializeField] private Button _closeSkinScreen;
 
     [SerializeField] private RulesGameHandler _rulesGameHandler;
 
@@ -45,6 +50,16 @@ public class ScreenManager : MonoBehaviour
         {
             Application.Quit();
         });
+
+        _openSkinScreen.onClick.AddListener(() =>
+        {
+            OpenScreenGame(NameScreen.SkinsChoiced);
+        });
+
+        _closeSkinScreen.onClick.AddListener(() =>
+        {
+            OpenScreenGame(NameScreen.Menu);
+        });
     }
 
     private void Start()
@@ -64,6 +79,9 @@ public class ScreenManager : MonoBehaviour
                 break;
             case NameScreen.Warning:
                 ScreenOpen(_warningScreen);
+                break;
+            case NameScreen.SkinsChoiced:
+                ScreenOpen(_skinsScreen);
                 break;
         }
     }
